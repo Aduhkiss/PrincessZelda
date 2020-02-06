@@ -5,5 +5,7 @@ public class PvPEngine {
 	 * Atticus' PvP Engine
 	 * Author: Atticus Zambrana
 	 */
-	
+	public PvPEngine() {
+		
+	}
 }

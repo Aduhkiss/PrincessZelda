@@ -63,7 +63,7 @@ public class Start {
 		LogUtil.info("PvP Engine", "Starting PvP Engine...");
 		pvp = new PvPEngine();
 		
-		 LogUtil.info("System", "Done.");
+		LogUtil.info("System", "Done.");
 	 }
 	 
 	 public static DiscordApi getDiscord() {

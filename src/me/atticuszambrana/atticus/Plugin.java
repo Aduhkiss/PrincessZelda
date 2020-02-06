@@ -8,6 +8,6 @@ public abstract class Plugin {
 	
 	public Plugin(String name) {
 		this.name = name;
-		LogUtil.info(name, "Registered.");
+		LogUtil.info(name, "Starting " + name + "...");
 	}
 }
