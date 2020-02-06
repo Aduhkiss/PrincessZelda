@@ -42,7 +42,7 @@ public class Start {
 				.join();
 		
 		// Setup the Database object
-		Database db = new Database();
+		Database db = Database.get();
 		
 		// Setup the Permissions Manager
 		permissions = new PermissionsManager(db);
@@ -64,5 +64,8 @@ public class Start {
 	 
 	 public static PermissionsManager getPermManager() {
 		 return permissions;
+	 }
+	 public static CommandManager getCommandManager() {
+		 return commandManager;
 	 }
 }

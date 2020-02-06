@@ -10,9 +10,11 @@ import org.javacord.api.listener.message.MessageCreateListener;
 
 import me.atticuszambrana.atticus.Start;
 import me.atticuszambrana.atticus.commands.Command;
-import me.atticuszambrana.atticus.commands.impl.test.RefreshPermsCommand;
-import me.atticuszambrana.atticus.commands.impl.test.TestCommand;
-import me.atticuszambrana.atticus.commands.impl.test.UserInfoCommand;
+import me.atticuszambrana.atticus.commands.impl.basic.HelpCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.RefreshPermsCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.TestCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.UpdateRankCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.UserInfoCommand;
 import me.atticuszambrana.atticus.permissions.Rank;
 import me.atticuszambrana.atticus.util.LogUtil;
 import me.atticuszambrana.atticus.util.StringUtil;
@@ -24,10 +26,14 @@ public class CommandManager implements MessageCreateListener {
 	
 	// Method run by the main class to get all commands registered, I will be sorting them into their individual groups with comments
 	public void registerCommands() {
-		// Testing Commands
+		// Developer Commands
 		register(new TestCommand());
 		register(new UserInfoCommand());
 		register(new RefreshPermsCommand());
+		//register(new UpdateRankCommand());
+		
+		// Basic Commands
+		register(new HelpCommand());
 	}
 	
 

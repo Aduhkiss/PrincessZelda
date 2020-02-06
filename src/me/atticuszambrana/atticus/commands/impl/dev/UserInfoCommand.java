@@ -1,4 +1,4 @@
-package me.atticuszambrana.atticus.commands.impl.test;
+package me.atticuszambrana.atticus.commands.impl.dev;
 
 import java.awt.Color;
 

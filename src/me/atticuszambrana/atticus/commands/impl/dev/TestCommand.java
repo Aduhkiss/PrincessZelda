@@ -1,4 +1,4 @@
-package me.atticuszambrana.atticus.commands.impl.test;
+package me.atticuszambrana.atticus.commands.impl.dev;
 
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;

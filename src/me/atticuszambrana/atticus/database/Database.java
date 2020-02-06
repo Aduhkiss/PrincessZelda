@@ -8,6 +8,15 @@ import java.sql.SQLException;
 import me.atticuszambrana.atticus.util.LogUtil;
 
 public class Database {
+	
+	public static Database me;
+	public static Database get() {
+		if(me == null) {
+			me = new Database();
+		}
+		return me;
+	}
+	
 	/*
 	 * Database Object
 	 * used to access data storage in MySQL
