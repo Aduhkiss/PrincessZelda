@@ -32,6 +32,7 @@ public class Database {
 	
 	public Database() {
 		// When the object gets created, lets connect!
+		LogUtil.info("Database", "Connecting to SQL Server...");
 		try {
 			if(connection != null && !connection.isClosed()) {
 				return;
@@ -50,6 +51,8 @@ public class Database {
 			ex.printStackTrace();
 			System.exit(1);
 		}
+		
+		LogUtil.info("Database", "Success!");
 		
 		// The fix
 		applyFix();

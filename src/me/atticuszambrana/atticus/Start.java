@@ -7,6 +7,7 @@ import me.atticuszambrana.atticus.database.Database;
 import me.atticuszambrana.atticus.manager.CommandManager;
 import me.atticuszambrana.atticus.manager.PermissionsManager;
 import me.atticuszambrana.atticus.manager.PluginManager;
+import me.atticuszambrana.atticus.pvp.PvPEngine;
 import me.atticuszambrana.atticus.util.LogUtil;
 
 public class Start {
@@ -17,6 +18,7 @@ public class Start {
 	// Stuff
 	private static PermissionsManager permissions;
 	private static CommandManager commandManager;
+	private static PvPEngine pvp;
 	
 	 public static void main(String[] args) {
 		 LogUtil.info("System", "Welcome to the Atticus Discord Bot!");
@@ -48,12 +50,18 @@ public class Start {
 		permissions = new PermissionsManager(db);
 		
 		// Start the Discord message listener so we can handle our commands, then hook it to the Command Manager
+		LogUtil.info("Command Manager Hook", "Starting Command Manager...");
 		commandManager = new CommandManager();
 		commandManager.registerCommands();
 		api.addMessageCreateListener(commandManager);
 		
 		// Start the plugins with the plugin manager
+		LogUtil.info("Plugin Manager", "Starting Plugin Manager...");
 		PluginManager.registerPlugins();
+		
+		// Start the new "pvp engine alpha test"
+		LogUtil.info("PvP Engine", "Starting PvP Engine...");
+		pvp = new PvPEngine();
 		
 		 LogUtil.info("System", "Done.");
 	 }
@@ -67,5 +75,8 @@ public class Start {
 	 }
 	 public static CommandManager getCommandManager() {
 		 return commandManager;
+	 }
+	 public static PvPEngine getPvPEngine() {
+		 return pvp;
 	 }
 }
