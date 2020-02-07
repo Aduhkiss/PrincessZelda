@@ -1,14 +1,11 @@
 package me.atticuszambrana.atticus.commands.impl.dev;
 
 import java.awt.Color;
-import java.sql.SQLException;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.commands.Command;
-import me.atticuszambrana.atticus.database.Database;
 import me.atticuszambrana.atticus.permissions.Rank;
 
 public class UpdateRankCommand extends Command {
@@ -18,13 +15,13 @@ public class UpdateRankCommand extends Command {
 	}
 
 	@Override
-	public void execute(String[] args, MessageAuthor author, TextChannel channel) {
+	public void execute(String[] args, MessageCreateEvent event) {
 		if(args.length != 3) {
 			EmbedBuilder err = new EmbedBuilder();
 			err.setColor(Color.RED);
 			err.setTitle("Error");
 			err.setDescription("You provided too many, or not enough arguments for this command.");
-			channel.sendMessage(err);
+			event.getChannel().sendMessage(err);
 			return;
 		}
 		
@@ -41,7 +38,7 @@ public class UpdateRankCommand extends Command {
 			err.setColor(Color.RED);
 			err.setTitle("Error");
 			err.setDescription("You gave an invalid rank name. Please check with a bot developer for rank names.");
-			channel.sendMessage(err);
+			event.getChannel().sendMessage(err);
 			return;
 		}
 		

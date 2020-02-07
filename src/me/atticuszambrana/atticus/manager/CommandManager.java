@@ -49,7 +49,7 @@ public class CommandManager implements MessageCreateListener {
 				// Permission check system
 				Rank myRank = Start.getPermManager().getRank(event.getMessageAuthor().asUser().get());
 				if(myRank.getPower() >= cmd.getValue().getRankRequired().getPower()) {
-					cmd.getValue().execute(StringUtil.toArray(event.getMessageContent()), event.getMessageAuthor(), event.getChannel());
+					cmd.getValue().execute(StringUtil.toArray(event.getMessageContent()), event);
 					// Then log it
 					LogUtil.info("Command Manager", event.getMessage().getAuthor().getName() + " ran " + event.getMessageContent());
 					return;
@@ -80,6 +80,10 @@ public class CommandManager implements MessageCreateListener {
 	
 	public Map<String, Command> getCommands() {
 		return Commands;
+	}
+	
+	public String getPrefix() {
+		return PREFIX;
 	}
 
 }

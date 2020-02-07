@@ -17,12 +17,19 @@ public class Activity extends Plugin {
 	private void update() {
 		new Thread() {
 			public void run() {
+				String prefix = Start.getCommandManager().getPrefix();
 				if(activityTick == 0) {
-					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Hello World!");
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, prefix + "help for commands!");
+					//System.out.println("Slide 1");
 					activityTick++;
 				}
-				if(activityTick == 1) {
-					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Hello World... 2!");
+				else if(activityTick == 1) {
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Welcome to Princess Zelda!");
+					//System.out.println("Slide 2");
+					activityTick++;
+				}
+				else if(activityTick == 2) {
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Minecraft");
 					activityTick = 0;
 				}
 				

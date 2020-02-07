@@ -3,9 +3,8 @@ package me.atticuszambrana.atticus.commands.impl.basic;
 import java.awt.Color;
 import java.util.Map;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.Start;
 import me.atticuszambrana.atticus.commands.Command;
@@ -18,14 +17,14 @@ public class HelpCommand extends Command {
 	}
 
 	@Override
-	public void execute(String[] args, MessageAuthor author, TextChannel channel) {
+	public void execute(String[] args, MessageCreateEvent event) {
 		
 		EmbedBuilder embed = new EmbedBuilder();
 		
 		embed.setColor(Color.CYAN);
 		embed.setTitle("Command List");
 		
-		Rank myRank = Start.getPermManager().getRank(author.asUser().get());
+		Rank myRank = Start.getPermManager().getRank(event.getMessageAuthor().asUser().get());
 		
 		for(Map.Entry<String, Command> cmd : Start.getCommandManager().getCommands().entrySet()) {
 			if(myRank.getPower() >= cmd.getValue().getRankRequired().getPower()) {
@@ -33,7 +32,7 @@ public class HelpCommand extends Command {
 			}
 		}
 		
-		channel.sendMessage(embed);
+		event.getChannel().sendMessage(embed);
 		return;
 	}
 

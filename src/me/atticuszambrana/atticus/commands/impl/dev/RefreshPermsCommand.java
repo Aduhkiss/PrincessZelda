@@ -2,9 +2,8 @@ package me.atticuszambrana.atticus.commands.impl.dev;
 
 import java.awt.Color;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.Start;
 import me.atticuszambrana.atticus.commands.Command;
@@ -18,9 +17,9 @@ public class RefreshPermsCommand extends Command {
 	}
 
 	@Override
-	public void execute(String[] args, MessageAuthor author, TextChannel channel) {
+	public void execute(String[] args, MessageCreateEvent event) {
 		// Ok
-		LogUtil.info("Permissions", "Refreshing Permissions Matrix due to command from " + author.getName() + ".");
+		LogUtil.info("Permissions", "Refreshing Permissions Matrix due to command from " + event.getMessageAuthor().getName() + ".");
 		Start.getPermManager().setupPermissions();
 		
 		EmbedBuilder embed = new EmbedBuilder();
@@ -29,7 +28,7 @@ public class RefreshPermsCommand extends Command {
 		embed.setTitle("Success!");
 		embed.setDescription("You have successfully refreshed the Permissions Matrix! This action has been logged.");
 		
-		channel.sendMessage(embed);
+		event.getChannel().sendMessage(embed);
 		
 		return;
 	}

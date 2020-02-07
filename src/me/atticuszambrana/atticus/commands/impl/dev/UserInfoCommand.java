@@ -2,9 +2,8 @@ package me.atticuszambrana.atticus.commands.impl.dev;
 
 import java.awt.Color;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.Start;
 import me.atticuszambrana.atticus.commands.Command;
@@ -17,16 +16,16 @@ public class UserInfoCommand extends Command {
 	}
 
 	@Override
-	public void execute(String[] args, MessageAuthor author, TextChannel channel) {
+	public void execute(String[] args, MessageCreateEvent event) {
 		
 		EmbedBuilder embed = new EmbedBuilder();
 		
 		embed.setColor(Color.BLUE);
 		embed.setTitle("Your account info");
-		embed.addField("Name", author.getName());
-		embed.addField("Rank", Start.getPermManager().getRank(author.asUser().get()).getName());
+		embed.addField("Name", event.getMessageAuthor().getName());
+		embed.addField("Rank", Start.getPermManager().getRank(event.getMessageAuthor().asUser().get()).getName());
 		
-		channel.sendMessage(embed);
+		event.getChannel().sendMessage(embed);
 		return;
 	}
 

@@ -46,9 +46,10 @@ public class Database {
 				connection = DriverManager.getConnection("jdbc:mysql://" + this.host + ":" + 3306 + "/" + this.database, this.username, this.password);
 			}
 		} catch(SQLException | ClassNotFoundException ex) {
-			LogUtil.info("Database", "Unable to connect to the Database.");
-			LogUtil.info("Database", "Printing Stack Trace of Error: ");
-			ex.printStackTrace();
+			//LogUtil.info("Database", "Unable to connect to the Database.");
+			//LogUtil.info("Database", "Printing Stack Trace of Error: ");
+			//ex.printStackTrace();
+			LogUtil.info("Database", "Unable to connect to the database: " + ex.getMessage());
 			System.exit(1);
 		}
 		

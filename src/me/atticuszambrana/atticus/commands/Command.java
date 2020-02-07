@@ -1,7 +1,6 @@
 package me.atticuszambrana.atticus.commands;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.permissions.Rank;
 
@@ -35,5 +34,5 @@ public abstract class Command {
 		return rankRequired;
 	}
 	
-	public abstract void execute(String[] args, MessageAuthor author, TextChannel channel);
+	public abstract void execute(String[] args, MessageCreateEvent event);
 }

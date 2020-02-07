@@ -2,6 +2,7 @@ package me.atticuszambrana.atticus.commands.impl.dev;
 
 import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.message.MessageAuthor;
+import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.commands.Command;
 import me.atticuszambrana.atticus.permissions.Rank;
@@ -14,7 +15,7 @@ public class TestCommand extends Command {
 	}
 
 	@Override
-	public void execute(String[] args, MessageAuthor author, TextChannel channel) {
+	public void execute(String[] args, MessageCreateEvent event) {
 		LogUtil.info("Testing", "It works!");
 		
 		for(String arg : args) {
