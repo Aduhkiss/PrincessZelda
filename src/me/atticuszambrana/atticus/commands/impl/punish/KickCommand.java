@@ -1,6 +1,8 @@
 package me.atticuszambrana.atticus.commands.impl.punish;
 
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -8,6 +10,7 @@ import org.javacord.api.entity.user.User;
 import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.commands.Command;
+import me.atticuszambrana.atticus.database.Database;
 import me.atticuszambrana.atticus.permissions.Rank;
 import me.atticuszambrana.atticus.util.LogUtil;
 import me.atticuszambrana.atticus.util.StringUtil;
@@ -38,6 +41,26 @@ public class KickCommand extends Command {
 		
 		// The [ZIP] Tag marks the punishment, as Zelda Issued Punishment
 		event.getServer().get().kickUser(target, reason + " [ZIP]");
+		
+		new Thread() {
+			public void run() {
+				try {
+					ResultSet result = Database.get().getConnection().createStatement().executeQuery("SELECT * FROM `SystemConfig` WHERE `TOKEN` = 'RemovePunishCommands';");
+					while(result.next()) {
+						boolean remove = Boolean.valueOf(result.getString("VALUE"));
+						
+						if(remove) {
+							event.getMessage().delete();
+						}
+					}
+				}
+				catch(SQLException ex) {
+					LogUtil.info("Database", "There was an error while trying to access the database: " + ex.getMessage());
+					ex.printStackTrace();
+				}
+			}
+		}.start();
+		
 		return;
 	}
 	
