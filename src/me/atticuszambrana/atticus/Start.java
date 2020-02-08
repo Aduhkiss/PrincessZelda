@@ -9,6 +9,8 @@ import me.atticuszambrana.atticus.manager.PermissionsManager;
 import me.atticuszambrana.atticus.manager.PluginManager;
 import me.atticuszambrana.atticus.pvp.PvPEngine;
 import me.atticuszambrana.atticus.util.LogUtil;
+import me.atticuszambrana.atticus.util.UtilTime;
+import me.atticuszambrana.atticus.util.UtilTime.TimeUnit;
 
 public class Start {
 	
@@ -22,6 +24,10 @@ public class Start {
 	
 	 public static void main(String[] args) {
 		 LogUtil.info("System", "Welcome to the Atticus Discord Bot!");
+		 
+		 // Grab the time as of now
+		 long epoch = System.currentTimeMillis();
+		 
 		 String TOKEN = null;
 		 if(!DEV_MODE) {
 			 if(args == null || args.length == 0) {
@@ -63,7 +69,7 @@ public class Start {
 		LogUtil.info("PvP Engine", "Starting PvP Engine...");
 		pvp = new PvPEngine();
 		
-		LogUtil.info("System", "Done.");
+		LogUtil.info("System", "All Done! Successfully started in " + UtilTime.convertString(System.currentTimeMillis() - epoch, 1, TimeUnit.FIT) + ".");
 	 }
 	 
 	 public static DiscordApi getDiscord() {

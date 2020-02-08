@@ -1,6 +1,7 @@
 package me.atticuszambrana.atticus.activity;
 
 import org.javacord.api.entity.activity.ActivityType;
+import org.javacord.api.entity.server.Server;
 
 import me.atticuszambrana.atticus.Plugin;
 import me.atticuszambrana.atticus.Start;
@@ -29,7 +30,14 @@ public class Activity extends Plugin {
 					activityTick++;
 				}
 				else if(activityTick == 2) {
-					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Minecraft");
+					
+					// Get the number of currently active servers that the bot is on
+					int i = 0;
+					for(Server server : Start.getDiscord().getServers()) {
+						i++;
+					}
+					
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Chilling on " + i + " servers.");
 					activityTick = 0;
 				}
 				
