@@ -14,8 +14,11 @@ import me.atticuszambrana.atticus.commands.impl.basic.HelpCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.RefreshPermsCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.RestartCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.TestCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.UpdateRankCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.UserInfoCommand;
+import me.atticuszambrana.atticus.commands.impl.punish.HistoryCommand;
 import me.atticuszambrana.atticus.commands.impl.punish.KickCommand;
+import me.atticuszambrana.atticus.commands.impl.punish.WarnCommand;
 import me.atticuszambrana.atticus.permissions.Rank;
 import me.atticuszambrana.atticus.util.LogUtil;
 import me.atticuszambrana.atticus.util.StringUtil;
@@ -31,14 +34,16 @@ public class CommandManager implements MessageCreateListener {
 		register(new TestCommand());
 		register(new UserInfoCommand());
 		register(new RefreshPermsCommand());
-		//register(new UpdateRankCommand());
+		register(new UpdateRankCommand());
 		register(new RestartCommand());
 		
 		// Basic Commands
 		register(new HelpCommand());
 		
 		// Punishment System Commands
+		register(new HistoryCommand());
 		register(new KickCommand());
+		register(new WarnCommand());
 	}
 	
 

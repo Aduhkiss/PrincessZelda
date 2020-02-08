@@ -1,7 +1,5 @@
 package me.atticuszambrana.atticus.commands.impl.dev;
 
-import org.javacord.api.entity.channel.TextChannel;
-import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.commands.Command;
