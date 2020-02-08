@@ -20,7 +20,7 @@ public class KickCommand extends Command {
 
 	@Override
 	public void execute(String[] args, MessageCreateEvent event) {
-		if(args.length >= 1) {
+		if(args.length <= 1) {
 			EmbedBuilder embed = new EmbedBuilder();
 			embed.setColor(Color.RED);
 			embed.setTitle("There was a problem!");
