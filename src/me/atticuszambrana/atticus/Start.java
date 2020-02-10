@@ -2,6 +2,7 @@ package me.atticuszambrana.atticus;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.activity.ActivityType;
 
 import me.atticuszambrana.atticus.database.Database;
 import me.atticuszambrana.atticus.manager.CommandManager;
@@ -48,6 +49,9 @@ public class Start {
 				.setToken(TOKEN)
 				.login()
 				.join();
+		
+		// Make the Activity display something about starting up
+		Start.getDiscord().updateActivity(ActivityType.PLAYING, "Starting please wait...");
 		
 		// Setup the Database object
 		Database db = Database.get();

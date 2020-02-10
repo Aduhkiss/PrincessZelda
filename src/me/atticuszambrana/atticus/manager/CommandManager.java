@@ -1,3 +1,4 @@
+
 package me.atticuszambrana.atticus.manager;
 
 import java.awt.Color;
@@ -16,6 +17,7 @@ import me.atticuszambrana.atticus.commands.impl.dev.RestartCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.TestCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.UpdateRankCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.UserInfoCommand;
+import me.atticuszambrana.atticus.commands.impl.punish.BanCommand;
 import me.atticuszambrana.atticus.commands.impl.punish.HistoryCommand;
 import me.atticuszambrana.atticus.commands.impl.punish.KickCommand;
 import me.atticuszambrana.atticus.commands.impl.punish.WarnCommand;
@@ -44,6 +46,7 @@ public class CommandManager implements MessageCreateListener {
 		register(new HistoryCommand());
 		register(new KickCommand());
 		register(new WarnCommand());
+		register(new BanCommand());
 	}
 	
 

@@ -3,7 +3,6 @@ package me.atticuszambrana.atticus.commands.impl.punish;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
@@ -17,10 +16,10 @@ import me.atticuszambrana.atticus.time.AtticusTime;
 import me.atticuszambrana.atticus.util.LogUtil;
 import me.atticuszambrana.atticus.util.StringUtil;
 
-public class KickCommand extends Command {
+public class BanCommand extends Command {
 	
-	public KickCommand() {
-		super("kick", "Kick a user from the server", Rank.MODERATOR);
+	public BanCommand() {
+		super("ban", "Remove a user from the server for an extended period of time", Rank.MODERATOR);
 	}
 
 	@Override
@@ -34,18 +33,14 @@ public class KickCommand extends Command {
 			return;
 		}
 		
-		User target = getUser(event.getMessage().getMentionedUsers());
+		User target = event.getMessage().getMentionedUsers().get(0);
 		String reason = StringUtil.combine(args, 2);
-		
-		// Fix this bug I found that fcks up the database for some reason
-//		if(reason == null || reason.length() == 0) {
-//			return;
-//		}
 		
 		AtticusTime exact = new AtticusTime();
 		
-		LogUtil.info("Punish", event.getMessageAuthor().getName() + " has kicked " + target.getName() + " for: " + reason);
+		LogUtil.info("Punish", event.getMessageAuthor().getName() + " has banned " + target.getName() + " for: " + reason);
 		
+
 		//TODO: Lookup the channel that we want to post notifications to, then give a notification for the kick
 		new Thread() {
 			public void run() {
@@ -66,7 +61,7 @@ public class KickCommand extends Command {
 				notify.setTitle("Punishment Added");
 				notify.addField("Moderator", event.getMessageAuthor().getName());
 				notify.addField("Target", target.getName());
-				notify.addField("Type", "Kick");
+				notify.addField("Type", "Ban");
 				notify.addField("Reason", reason);
 				notify.addField("Timestamp", exact.getTime());
 				
@@ -74,8 +69,7 @@ public class KickCommand extends Command {
 			}
 		}.start();
 		
-		// The [ZIP] Tag marks the punishment, as Zelda Issued Punishment
-		event.getServer().get().kickUser(target, reason + " [ZIP]");
+		event.getServer().get().banUser(target, 100, reason + " [ZIP]");
 		
 		new Thread() {
 			public void run() {
@@ -99,7 +93,7 @@ public class KickCommand extends Command {
 		new Thread() {
 			public void run() {
 				try {
-					Database.get().getConnection().createStatement().executeUpdate("INSERT INTO `Punishments_Kicks` (`ID`, `MODERATOR`, `TARGET`, `REASON`, `TIMESTAMP`) VALUES (NULL, '" + event.getMessageAuthor().getIdAsString() + "', '" + target.getIdAsString() + "', '" + reason + "', '" + exact.getMilli() + "');");
+					Database.get().getConnection().createStatement().executeUpdate("INSERT INTO `Punishments_Bans` (`ID`, `MODERATOR`, `TARGET`, `REASON`, `TIMESTAMP`) VALUES (NULL, '" + event.getMessageAuthor().getIdAsString() + "', '" + target.getIdAsString() + "', '" + reason + "', '" + exact.getMilli() + "');");
 				}
 				catch(SQLException ex) {
 					LogUtil.info("Database", "There was an error while inputting data into the database: " + ex.getMessage());
@@ -109,10 +103,6 @@ public class KickCommand extends Command {
 		}.start();
 		
 		return;
-	}
-	
-	private User getUser(List<User> users) {
-		return users.get(0);
 	}
 
 }

@@ -24,7 +24,7 @@ public class WarnCommand extends Command {
 
 	@Override
 	public void execute(String[] args, MessageCreateEvent event) {
-		if(args.length <= 1) {
+		if(args.length == 1 || args.length == 2) {
 			EmbedBuilder embed = new EmbedBuilder();
 			embed.setColor(Color.RED);
 			embed.setTitle("There was a problem!");
@@ -104,7 +104,7 @@ public class WarnCommand extends Command {
 		embed.setTitle("You have been warned!");
 		embed.setDescription("You have been issued a friendly warning for: " + reason);
 		
-		target.getPrivateChannel().get().sendMessage(embed);
+		target.sendMessage(embed);
 		return;
 	}
 

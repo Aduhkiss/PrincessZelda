@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.user.User;
@@ -15,9 +14,10 @@ import org.javacord.api.event.message.MessageCreateEvent;
 
 import me.atticuszambrana.atticus.Start;
 import me.atticuszambrana.atticus.commands.Command;
-import me.atticuszambrana.atticus.commands.impl.punish.Punishment.PunishmentType;
 import me.atticuszambrana.atticus.database.Database;
 import me.atticuszambrana.atticus.permissions.Rank;
+import me.atticuszambrana.atticus.punish.Punishment;
+import me.atticuszambrana.atticus.punish.Punishment.PunishmentType;
 import me.atticuszambrana.atticus.util.LogUtil;
 
 public class HistoryCommand extends Command {
@@ -49,21 +49,30 @@ public class HistoryCommand extends Command {
 					// Kicks
 					ResultSet kickResults = conn.createStatement().executeQuery("SELECT * FROM `Punishments_Kicks` WHERE `TARGET` = '" + target.getId() + "';");
 					while(kickResults.next()) {
-						Punishment p = new Punishment(kickResults.getString("MODERATOR"), kickResults.getString("TARGET"), kickResults.getString("REASON"), Long.valueOf(kickResults.getString("TIMESTAMP")), PunishmentType.KICK);
+						Punishment p = new Punishment(kickResults.getInt("ID"), kickResults.getString("MODERATOR"), kickResults.getString("TARGET"), kickResults.getString("REASON"), Long.valueOf(kickResults.getString("TIMESTAMP")), PunishmentType.KICK);
 						Punishments.add(p);
 					}
 					
 					// Warnings
 					ResultSet warnResults = conn.createStatement().executeQuery("SELECT * FROM `Punishments_Warns` WHERE `TARGET` = '" + target.getId() + "';");
 					while(warnResults.next()) {
-						Punishment p = new Punishment(kickResults.getString("MODERATOR"), kickResults.getString("TARGET"), kickResults.getString("REASON"), Long.valueOf(kickResults.getString("TIMESTAMP")), PunishmentType.WARNING);
+						Punishment p = new Punishment(warnResults.getInt("ID"), warnResults.getString("MODERATOR"), warnResults.getString("TARGET"), warnResults.getString("REASON"), Long.valueOf(warnResults.getString("TIMESTAMP")), PunishmentType.WARNING);
 						Punishments.add(p);
 					}
 					
 				} catch(SQLException ex) {
-					LogUtil.info("Database", "Error: " + ex.getMessage());
-					ex.printStackTrace();
-					return;
+					// Fix this bug, and let staff members know there are no punishments found
+//					if(ex.getMessage().equalsIgnoreCase("After end of result set")) {
+//						EmbedBuilder embed = new EmbedBuilder();
+//						embed.setColor(Color.GREEN);
+//						embed.setTitle("Clean record!");
+//						embed.setDescription(target.getName() + " has a clean punishment history!");
+//						event.getChannel().sendMessage(embed);
+//						return;
+//					}
+					
+					//LogUtil.info("Database", "Error: " + ex.getMessage());
+					//ex.printStackTrace();
 				}
 				
 				for(Punishment punish : Punishments) {

@@ -1,8 +1,10 @@
-package me.atticuszambrana.atticus.commands.impl.punish;
+package me.atticuszambrana.atticus.punish;
 
 import java.awt.Color;
 
 public class Punishment {
+	
+	private int punishId;
 	
 	private String moderatorId;
 	private String targetId;
@@ -10,7 +12,8 @@ public class Punishment {
 	private long timestamp;
 	private PunishmentType type;
 	
-	public Punishment(String moderatorId, String targetId, String reason, long timestamp, PunishmentType type) {
+	public Punishment(int punishId, String moderatorId, String targetId, String reason, long timestamp, PunishmentType type) {
+		this.punishId = punishId;
 		this.moderatorId = moderatorId;
 		this.targetId = targetId;
 		this.reason = reason;
@@ -36,6 +39,10 @@ public class Punishment {
 	
 	public PunishmentType getType() {
 		return type;
+	}
+	
+	public int getID() {
+		return punishId;
 	}
 	
 	public enum PunishmentType {
