@@ -1,10 +1,14 @@
 package me.atticuszambrana.atticus.activity;
 
+import java.util.concurrent.ExecutionException;
+
 import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.server.Server;
+import org.javacord.api.entity.user.User;
 
 import me.atticuszambrana.atticus.Plugin;
 import me.atticuszambrana.atticus.Start;
+import me.atticuszambrana.atticus.util.LogUtil;
 
 public class Activity extends Plugin {
 	
@@ -25,7 +29,23 @@ public class Activity extends Plugin {
 					activityTick++;
 				}
 				else if(activityTick == 1) {
-					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Welcome to Princess Zelda!");
+					// Lol advertise my own stream cause why not
+					User atticus = null;
+					try {
+						atticus = Start.getDiscord().getUserById("249326432390610944").get();
+					} catch (InterruptedException | ExecutionException e) {
+						// TODO Auto-generated catch block
+						LogUtil.info("Atticus", "Error getting Atticus as a user. Displaying fallback message...");
+						Start.getDiscord().updateActivity(ActivityType.PLAYING, "Error. GG-DUG01");
+						e.printStackTrace();
+					}
+					
+					if(atticus.getActivity().get().getType() == ActivityType.STREAMING) {
+						Start.getDiscord().updateActivity("Atticus is Live!", "twitch.tv/atticuswasneverhere");
+					} else {
+						Start.getDiscord().updateActivity(ActivityType.PLAYING, "Welcome to Yeta!");
+					}
+					
 					//System.out.println("Slide 2");
 					activityTick++;
 				}
@@ -37,7 +57,19 @@ public class Activity extends Plugin {
 						i++;
 					}
 					
-					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Chilling on " + i + " servers.");
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, "I am on " + i + " servers.");
+					activityTick++;
+				}
+				else if(activityTick == 3) {
+					// Get all the servers that we are on right now
+					int i = 0;
+					for(Server server : Start.getDiscord().getServers()) {
+						for(User user : server.getMembers()) {
+							i++;
+						}
+					}
+					
+					Start.getDiscord().updateActivity(ActivityType.PLAYING, "Watching " + i + " users.");
 					activityTick = 0;
 				}
 				
