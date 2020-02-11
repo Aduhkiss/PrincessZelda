@@ -4,6 +4,7 @@ public enum AttackType {
 	
 	HIT("hit", 2),
 	SLAP("slapped", 2),
+	STAB("stabbed", 5),
 	BITE("bit", 4);
 	
 	String trigger;

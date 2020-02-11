@@ -5,6 +5,7 @@ import java.util.Map;
 
 import me.atticuszambrana.atticus.Plugin;
 import me.atticuszambrana.atticus.activity.Activity;
+import me.atticuszambrana.atticus.pvp.PvPEngine;
 
 public class PluginManager {
 	
@@ -15,6 +16,7 @@ public class PluginManager {
 	public static void registerPlugins() {
 		// Void called by the main class to register all of the plugins
 		Plugins.put(1, new Activity());
+		Plugins.put(2, new PvPEngine());
 	}
 	
 	public Plugin getPlugin(int id) {
