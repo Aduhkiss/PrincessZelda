@@ -69,6 +69,16 @@ public class BanCommand extends Command {
 			}
 		}.start();
 		
+		// Add a check to all the punishments, to make sure that we are able to do so
+		if(!event.getServer().get().canYouKickUser(target) || !event.getServer().get().canYouKickUsers()) {
+			EmbedBuilder err = new EmbedBuilder();
+			err.setColor(Color.RED);
+			err.setTitle("I do not have permission!");
+			err.setDescription("I do not have the required permissions to complete this action! Make sure I have the `Ban Users` permission node, and my role is higher then the user you are trying to punish!");
+			event.getChannel().sendMessage(err);
+			return;
+		}
+		
 		event.getServer().get().banUser(target, 100, reason + " [ZIP]");
 		
 		new Thread() {

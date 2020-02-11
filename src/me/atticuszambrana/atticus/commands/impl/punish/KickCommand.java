@@ -74,6 +74,16 @@ public class KickCommand extends Command {
 			}
 		}.start();
 		
+		// Add a check to all the punishments, to make sure that we are able to do so
+		if(!event.getServer().get().canYouKickUser(target) || !event.getServer().get().canYouKickUsers()) {
+			EmbedBuilder err = new EmbedBuilder();
+			err.setColor(Color.RED);
+			err.setTitle("I do not have permission!");
+			err.setDescription("I do not have the required permissions to complete this action! Make sure I have the `Kick Users` permission node, and my role is higher then the user you are trying to punish!");
+			event.getChannel().sendMessage(err);
+			return;
+		}
+		
 		// The [ZIP] Tag marks the punishment, as Zelda Issued Punishment
 		event.getServer().get().kickUser(target, reason + " [ZIP]");
 		
