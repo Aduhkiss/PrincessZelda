@@ -14,6 +14,7 @@ import me.atticuszambrana.atticus.commands.Command;
 import me.atticuszambrana.atticus.commands.impl.basic.HelpCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.RefreshPermsCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.RestartCommand;
+import me.atticuszambrana.atticus.commands.impl.dev.SystemInfoCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.TestCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.UpdateRankCommand;
 import me.atticuszambrana.atticus.commands.impl.dev.UserInfoCommand;
@@ -38,6 +39,7 @@ public class CommandManager implements MessageCreateListener {
 		register(new RefreshPermsCommand());
 		register(new UpdateRankCommand());
 		register(new RestartCommand());
+		register(new SystemInfoCommand());
 		
 		// Basic Commands
 		register(new HelpCommand());
