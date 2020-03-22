@@ -23,10 +23,10 @@ public class Database {
 	 * Author: Atticus Zambrana
 	 */
 	
-	private String username = "1kb9s39kJl";
-	private String database = "1kb9s39kJl";
-	private String password = "j1aHiwhYJt";
-	private String host = "remotemysql.com";
+	private String username = "[removed for source release]";
+	private String database = "[removed for source release]";
+	private String password = "[removed for source release]";
+	private String host = "[removed for source release]";
 	
 	private Connection connection;
 	
