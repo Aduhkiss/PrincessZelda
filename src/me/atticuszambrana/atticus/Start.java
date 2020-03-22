@@ -39,7 +39,8 @@ public class Start {
 			 TOKEN = args[0];
 		 } else {
 			 // DELETE THIS BEFORE OPEN SOURCING LMAO
-			 TOKEN = "Njc0NDkxMDM1NzY1NzAyNjg4.XjpW4w.kCKxjZpy0lVnqnVm2PrqoCpBk_k";
+			 TOKEN = "[removed for open sourcing...even though i actually left it in, and discord auto reset it lol]";
+			 // TL;DR: Thanks Discord Love ya! <3
 		 }
 		 
 		 LogUtil.info("System", "Logging into Discord...");
